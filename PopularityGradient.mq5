@@ -51,13 +51,16 @@ void OnTick()
    int lowestCandleIndex;
    double High[];
    double Low[];
+   
+   int numberOfConsideredBars = ChartGetInteger(0, CHART_VISIBLE_BARS, 0);
+   
    ArraySetAsSeries(High, true);
    ArraySetAsSeries(Low, true);
-   CopyHigh(_Symbol, _Period, 0, 100, High);
-   CopyLow(_Symbol, _Period, 0, 100, Low);
+   CopyHigh(_Symbol, _Period, 0, numberOfConsideredBars, High);
+   CopyLow(_Symbol, _Period, 0, numberOfConsideredBars, Low);
 
-   highestCandleIndex = ArrayMaximum(High, 0, 100);
-   lowestCandleIndex = ArrayMinimum(Low, 0, 100);
+   highestCandleIndex = ArrayMaximum(High, 0, numberOfConsideredBars);
+   lowestCandleIndex = ArrayMinimum(Low, 0, numberOfConsideredBars);
 
    double highestPrice = High[highestCandleIndex];
    double lowestPrice = Low[lowestCandleIndex];
